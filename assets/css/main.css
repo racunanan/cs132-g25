@@ -2443,3 +2443,13 @@ input, select, textarea {
 					}
 
 	}
+
+.members {
+	max-width: 25%;
+	height: auto;
+	border-radius: 50%;
+}
+
+.emails {
+	color: yellow;
+}
