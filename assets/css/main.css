@@ -2453,3 +2453,11 @@ input, select, textarea {
 .emails {
 	color: yellow;
 }
+
+.subjects {
+	color: #10BEF1;
+}
+
+#teamTitle {
+	text-decoration: underline;
+}
