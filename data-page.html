@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>PH Twitter Fake News Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="is-preload">
+        <nav id="nav">
+            <ul class="container">
+                <li><a href="#top">Data Collection</a></li>
+                <li><a href="#criteria">Labeling Criteria</a></li>
+                <li><a href="#sample">Sample Data</a></li>
+                <li><a href="./index.html">Back to Home</a></li>
+            </ul>
+        </nav>
+        <article id="top" class="wrapper style1">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Data Collection Method
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    We collected data from Twitter using both <strong>manual</strong>
+                    collection and <strong>automated</strong> collection. For the
+                    manual collection, we manually browsed Twitter to scrape
+                    tweets that were relevant to our topic. For the automated 
+                    collection, we used the <strong>snscrape</strong> package
+                    in Python to automatically collect tweets with some given
+                    parameters.
+                </p>
+                <p>
+                    Tweets that were collected were only the tweets that were
+                    posted between the year <strong>2016</strong> and 
+                    <strong>2022</strong> (inclusive). 
+                </p>
+                <p>
+                    For both the manual and automated data collection, we used
+                    the following keywords:
+                </p>
+                <p><ol class="container">
+                    <li>abolish k-12</li>
+                    <li>sara k-14</li>
+                    <li>K-14 sara duterte</li>
+                    <li>sara k-12</li>
+                </ol></p>
+                <p>
+                    Note that the list of keywords above is <strong>not 
+                    exhaustive</strong>. This means that any combination of the above
+                    words were used as well as different capitalizations to help
+                    find relevant tweets.
+                </p>
+            </div>
+        </article>
+
+        <article id="criteria" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Labeling Criteria
+                        </strong>
+                    </h1>
+                </header>
+                <p class="bodyText">
+                    In order to determine the particular stance of an account 
+                    with Sara Duterte, we made sure to check for
+                    <strong>more than 1</strong> tweet that implies their stance.
+                    This means we check for other tweets that the account has made
+                    (other than the collected tweet) that implies their stance.
+                    This is only applicable to accounts that do not explicitly 
+                    state their stance on Sara Duterte.
+                </p>
+                <p class="bodyText">
+                    We also consider their <strong>support for another person</strong> as a basis
+                    for determining the stance of an account. An example is that
+                    we consider Kiko Pangilinan supporters as Anti-Sara due to
+                    Kiko Pangilinan being a VP candidate like Sara Duterte during
+                    the 2022 elections.
+                </p>
+                <p class="bodyText">
+                    Accounts that only made 1 post regarding Sara Duterte or have
+                    conflicting opinions are considered <strong>Ambiguous</strong>.
+                    We also considered <strong>Marcos supporters</strong> that <strong>made no mention
+                    of Sara Duterte</strong> as Ambiguous even if the accounts that we
+                    determined to be Pro-Sara were also Marcos supporters.
+                </p>
+            </div>
+        </article>
+
+        <article id="sample" class="wrapper style3" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Sample Data
+                        </strong>
+                    </h1>
+                </header>
+                <!--Pro-Sara-->
+                <p class="bodyText">
+                    Here are some sample mis/disinformation tweets that were taken from accounts that
+                    we have labeled as <strong>Pro-Sara</strong>:
+                </p>
+                <p class="tweet">
+                    "Sara will abolish K-12 system and bring back old system"
+                </p>
+                <p class="tweet">
+                    "VP Sara removing the K-12 program to simply K-10? What can 
+                    you ask for? Maraming salamat po VP!!!"
+                </p>
+                <p class="tweet">
+                    "I am with sara duterte. Whatever she want to do i will 
+                    support her. But as a pioneer ng k-12 gusto na naming 
+                    mayapatunayan. K-14. Another two yrs is too much for me/us"
+                </p>
+
+                <!--Anti-Sara-->
+                <p class="bodyText">
+                    Here are some sample mis/disinformation tweets that were taken from accounts that
+                    we have labeled as <strong>Anti-Sara</strong>:
+                </p>
+                <p class="tweet">
+                    "K - 12 EDUC PROGRAM 
+                    was meant to enhance, prepare and update our young generations' mastery of concepts at par with World standards.
+
+                    The last Admin didn't support this & worst placed education far behind.
+
+                    Today, the new Admin is moving to abolish it.
+
+                    PABALIK NA PO TAYO."
+                </p>
+                <p class="tweet">
+                    "I can already see the rants ng ibang magulang na bumoto kina 
+                    BBM and Sara regarding the plans of turning k-12 into k-14.🫣
+
+                    I mean, you voted them why not support?
+                    <span style="font-style: normal;">🤔</span>🫢"
+                </p>
+                <p class="tweet">
+                    "when sara says it isn't all about education then replaces 
+                    k-12 to k-14, how ironic."
+                </p>
+
+                <!--Ambiguous-->
+                <p class="bodyText">
+                    Here are some sample mis/disinformation tweets that were taken from accounts that
+                    we have labeled as <strong>Ambiguous</strong>:
+                </p>
+                <p class="tweet">
+                    "The new admin wants to abolish the K-12 system. Imagine 
+                    tayong mga estudyante na naghirap for additional 2 years tas 
+                    may balak iabolish.
+
+                    That doesn't seem fair"
+                </p>
+                <p class="tweet">
+                    "May plano si Sara na gawing k-14 ang k-12 hahaha. I have a 
+                    better plan, I'll marry a wealthy man."
+                </p>
+                <p class="tweet">
+                    "'k-12 -> k-14'
+
+                    in sara, we trust."
+                </p>
+
+            </div>
+        </article>
+    </body>
+</html>

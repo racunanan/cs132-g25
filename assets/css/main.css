@@ -2461,3 +2461,14 @@ input, select, textarea {
 #teamTitle {
 	text-decoration: underline;
 }
+
+.bodyText {
+	font-size: x-large;
+}
+
+.tweet {
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+	font-style: italic;
+}
