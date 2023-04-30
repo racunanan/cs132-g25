@@ -2472,3 +2472,7 @@ input, select, textarea {
 	font-weight: bold;
 	font-style: italic;
 }
+
+.feature {
+	font-size: large;
+}
