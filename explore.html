@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>PH Twitter Fake News Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="is-preload">
+        <nav id="nav">
+            <ul class="container">
+                <li><a href="#missing">Missing Data</a></li>
+                <li><a href="#format">Data Formatting</a></li>
+                <li><a href="#standardization">Standardization</a></li>
+                <li><a href="#encoding">Data Encoding</a></li>
+                <li><a href="#nlp">NLP</a></li>
+                <li><a href="#visual">Visualization</a></li>
+                <li><a href="./index.html">Back to Home</a></li>
+            </ul>
+        </nav>
+        <article id="missing" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Missing Data
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    The missing values in the dataset were primarily under
+                    categorical fields such as "Location" and "Account bio".
+                    The word "<strong>N/A</strong>" was used as the default value for these 
+                    fields.
+                </p>
+                <p>
+                    The fields that were filled in this manner are the following:
+                </p>
+                <p><ol class="container">
+                    <li>Account bio</li>
+                    <li>Location</li>
+                    <li>Tweet Translated</li>
+                    <li>Screenshot</li>
+                    <li>Rating</li>
+                    <li>Remarks</li>
+                </ol></p>
+                <p>
+                    For the "Quote Tweets" field, the default value is <strong>
+                    0</strong>. We can safely assume that no Quote Tweets would
+                    mean that there were no Quote Tweets for that particular post.
+                    As for the "Views" field, we have decided to omit it from the
+                    dataset. This was because there were too many missing values 
+                    and available view counts vary greatly. It is difficult to 
+                    assume how many views a tweet has.
+                </p>
+            </div>
+        </article>
+
+        <article id="format" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Data Formatting
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    With regards to formatting, some edits where made to some
+                    typos that were found such as "<strong>Anti-Sara</strong>"
+                    ending up as "<strong>Anti-Sera</strong>" instead.
+                </p>
+                <p>
+                    The values under the "Dates posted" field were also editted
+                    to fix some inconsistencies with the format. The format used 
+                    in this field is "<strong>DD/MM/YY HH:MM</strong>". Some values 
+                    were found to have a 4-digit year value so this was editted 
+                    during preprocesssing.
+                </p>
+            </div>
+        </article>
+
+        <article id="standardization" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Standardization
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    To get an understanding of the follower counts of the accounts 
+                    in the dataset, the values under the "Followers" were standardized.
+                    This was done with the help of the <strong>scikit-learn</strong>
+                    package of Python to help produce the <strong>zscores</strong>
+                    needed. This is to ensure that the values are scaled relatively
+                    close to each other.
+                </p>
+                <img class="graphs" src="./images/zscore.jpg" />
+                <p class="label">Graph 1: Distribution of follower count zscores</p><br />
+                <p>
+                    In the graph above, notice that there is <strong>one</strong>
+                    notable outlier. We found out that the outlier account had 
+                    50K+ followers as opposed to the typically 4-digits or less
+                    of other accounts. This outlier was then removed to produce
+                    another zscore distribution.
+                </p>
+                <img class="graphs" src="./images/zscore2.jpg" />
+                <p class="label">
+                    Graph 2: Modified distribution of follower count zscores
+                </p><br />
+                <p>
+                    The graph above shows a better distribution of the zscores 
+                    once the major outlier was removed. Note that the graph above 
+                    is sorted compared to the previous one.
+                </p>
+            </div>
+        </article>
+
+        <article id="encoding" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Data Encoding
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    To allow ease of use during data visualization, some
+                    categorical fields were encoded using <strong>One-hot encoding</strong>
+                    to convert them to numerical fields. These fields are the 
+                    "Account type" and "Stance on Sara" fields. The "Stance on Sara"
+                    field was a field added during Data Collection.
+                </p>
+                <p>
+                    One-hot encoding is a method for converting categorical data 
+                    into numerical data by splitting the categories into their own 
+                    columns and assigning each row either a <strong>1</strong> or
+                    <strong>0</strong>. A <strong>1</strong> denotes the feature 
+                    that a particular row possesses and vice versa.
+                </p>
+                <p>
+                    A One-hot encoding of the "Account type" field would look as 
+                    follows:
+                </p>
+                <img class="graphs" src="./images/account_type.jpg" />
+                <p class="label">
+                    Figure 1: Account type One-hot encoding
+                </p><br />
+
+                <p>
+                    A One-hot encoding of the "Stance on Sara" field would look
+                    as follows:
+                </p>
+                <img class="graphs" src="./images/stance.jpg" />
+                <p class="label">
+                    Figure 2: Stance on Sara One-hot encoding
+                </p><br />
+            </div>
+        </article>
+
+        <article id="nlp" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Natural Language Processing
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    To simplify the tweets collected, NLP was done to help breakdown
+                    each tweet content to a form that is suitable for machine learning.
+                    NLP was made possible with the help of the <strong>Natural Language Toolkit</strong>
+                    package of Python.
+                </p>
+
+                <h3 style="color: brown">Tokenization and Lower-casing</h3>
+                <p>
+                    Tokenization was done by running the function shown below.
+                </p>
+                <img class="graphs" src="./images/tokenize.jpg" />
+                <p class="label">
+                    Figure 3: Tokenization function
+                </p><br />
+
+                <p>
+                    For a tweet that says "<strong>The new admin wants to 
+                        abolish the K-12 system. Imagine tayong mga estudyante
+                        na naghirap for additional 2 years tas may balak iabolish
+
+                        That doesn't seem fair
+                    </strong>", a tokenization would look as follows:
+                </p>
+                <img class="graphs" src="./images/tokenize_done.jpg" />
+                <p class="label">
+                    Figure 4: Tokenization example
+                </p><br />
+
+                <h3 style="color: brown">Stop Words Removal</h3>
+                <p>
+                    Due to the mix of English, Filipino, and a case of Cebuano,
+                    some external packages were loaded to help identify these 
+                    stop words. The function below loads a list of stopwords from 
+                    the three languages stated and removes the words from the tweets.
+                </p>
+                <img class="graphs" src="./images/stop.jpg" />
+                <p class="label">
+                    Figure 5: Stop words removal function
+                </p><br />
+
+                <p>
+                    Running the function above would produce an output as follows:
+                </p>
+                <img class="graphs" src="./images/stop_done.jpg" />
+                <p class="label">
+                    Figure 6: Stop words removal example
+                </p><br />
+
+                <h3 style="color: brown">Lemmatization</h3>
+                <p>
+                    The last NLP process done was lemmatization. This process 
+                    reduces words to their root form as opposed to Stemming, which
+                    reduces words to a basic word that may or may not make sense
+                    given some context. The function below performs the lemmatization 
+                    process.
+                </p>
+                <img class="graphs" src="./images/lemmatize.jpg" />
+                <p class="label">
+                    Figure 7: Lemmatization function
+                </p><br />
+
+                <p>
+                    Running the function above would produce an output as follows:
+                </p>
+                <img class="graphs" src="./images/lemmatize_done.jpg" />
+                <p class="label">
+                    Figure 8: Lemmatization example
+                </p><br />
+            </div>
+        </article>
+
+        <article id="visual" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Visualization
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    The following section shows some graphs to help give a better 
+                    understanding of the dataset.
+                </p>
+                <p>
+                    The following graph shows a comparison of the stances of each 
+                    account on Sara Duterte. For each stance, we separated the "Identified"
+                    accounts from the "Anonymous" accounts. We opted not to include
+                    "Media" accounts since none of the tweets collected came from a 
+                    media account.
+                </p>
+                <img class="graphs" src="./images/stance_graph.jpg" />
+                <p class="label">
+                    Graph 3: Stance comparison
+                </p><br />
+
+                <p>
+                    From the graph, we an see that a majority of the accounts that 
+                    were collected have an <strong>Ambiguous</strong> stance.
+                    It can also be seen that <strong>Anonymous</strong> accounts 
+                    are more numerous than Identified accounts.
+                </p>
+
+                <p>
+                    The following graph shows an analysis of the dates when the
+                    tweets were posted. Before graphing, the dates were binned into 
+                    <strong>Month and Year</strong> to reduce the size of the graph 
+                    and the number of points.
+                </p>
+                <img class="graphs" src="./images/time.jpg" />
+                <p class="label">
+                    Graph 4: Time analysis
+                </p><br />
+
+                <p>
+                    From the graph, we can see that the amount of posts relating
+                    to Sara Duterte and K-12 peaked at around May 2022. This time 
+                    was when the 2022 election results were released in the 
+                    Philippines.
+                </p>
+
+                <p>
+                    The following graph shows the general correlation of fields 
+                    that we dubbed "Engagement". The fields included here are the 
+                    "Likes", "Replies", "Retweets", and "Quote Tweets" field.
+                    The graph used is a heatmap that shows the correlation of 
+                    multiple fields. The specific correlation used is the <strong>Pearson
+                    correlation</strong> to check for a linear correlation.
+                </p>
+                <img class="graphs" src="./images/heat.png" />
+                <p class="label">
+                    Graph 5: Correlation of multiple features
+                </p><br />
+
+                <p>
+                    To better grasp each of the correlations above, we provide 
+                    some scatterplots to show the correlation of a few select field pairs.
+                    Not that correlation <strong>does not</strong> imply causation,
+                    so these pairs may not be directly influencing each other.
+                </p>
+
+                <div class="imgRow">
+                    <div class="imgCol">
+                        <img class="graphs" src="./images/corr1.jpg" style="width:100%;" />
+                    </div>
+                    <div class="imgCol">
+                        <img class="graphs" src="./images/corr2.jpg" style="width:100%;" />
+                    </div>
+                    <div class="imgCol">
+                        <img class="graphs" src="./images/corr3.jpg" style="width:100%;" />
+                    </div>
+                </div>
+                <p class="label">
+                    Graph 6-8: Correlation of select feature pairs
+                </p><br />
+            </div>
+        </article>
+</html>

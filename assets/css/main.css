@@ -2476,3 +2476,28 @@ input, select, textarea {
 .feature {
 	font-size: large;
 }
+
+.graphs {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.label {
+	font-size: small;
+	font-style: italic;
+	font-weight: 900;
+	text-align: center;
+}
+
+.imgCol {
+	float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+.imgRow::after {
+	content: "";
+    clear: both;
+    display: table;
+}
