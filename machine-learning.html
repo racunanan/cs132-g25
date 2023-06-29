@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>PH Twitter Fake News Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="is-preload">
+        <nav id="nav">
+            <ul class="container">
+                <li><a href="#top">Topic Clustering</a></li>
+                <li><a href="#chisquare">Chi-Square Test</a></li>
+                <li><a href="./index.html">Back to Home</a></li>
+            </ul>
+        </nav>
+        <article id="top" class="wrapper style1">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Topic Clustering
+                        </strong>
+                    </h1>
+                </header>
+                <p>
+                    We wanted to take a closer look at the content of each tweet,
+                    so we decided to use <strong>K-Means clustering</strong> to
+                    find topic clusters in the tweets. Prior to performing
+                    clustering, we used NLP to help simplify the tweet texts in
+                    order for the model to work.
+                </p>
+                <p>
+                    We limit the model to only producing three clusters. This was
+                    because, after some trial runs, we determined that limiting
+                    the model to only three clusters produced more unique and easily
+                    identifiable topics.
+                </p>
+                <img class="graphs" src="./images/cluster.png" />
+                <p class="label" style="font-size: small;">Figure 1: Topic clustering</p>
+                <p>
+                    We have identified some sample tweets from each of the three
+                    topic clusters and included them in the figure above. We 
+                    identified the three topics to be as follows: 
+                </p>
+                <p><ol class="container">
+                    <li>Effects of the K-12 changes on schooling</li>
+                    <li>Mandatory military service</li>
+                    <li>Criticisms and/or sarcasms about the Marcos-Duterte administration</li>
+                </ol></p>
+            </div>
+        </article>
+
+        <article id="chisquare" class="wrapper style2" style="text-align:left;">
+            <div class="container">
+                <header>
+                    <h1>
+                        <strong style="color: brown;">
+                            Chi-Square Test of Independence
+                        </strong>
+                    </h1>
+                </header>
+                <p class="bodyText">
+                    We use the Chi-Square test of independence to check if there
+                    is a relationship between an account's <strong>stance on Sara</strong> and the type of the
+                    account, which is either <strong>anonymous or identified (real names, official accounts, etc.)</strong> 
+                    . We let our <strong>null hypothesis</strong> be that there is no relationship
+                    between the two. The test produced the following results.
+                </p>
+                <p><ol class="container" style="font-size: large;">
+                    <li><strong>Chi-Square Statistic = 7.92</strong></li>
+                    <li><strong>P-Value = 0.019</strong></li>
+                </ol></p>
+                <p class="bodyText">
+                    For the test, we assume a confidence of 95% or an alpha value
+                    of 0.05. We can see that the <strong>P-value is less than the
+                    alpha value</strong>. Thus, we can reject the null hypothesis.
+                    However, the <strong>Chi-Square statistic</strong> is somewhat
+                    low. Because of this, we cannot say that there is a particularly 
+                    strong relationship present between the account's stance on
+                    Sara and the account type.
+                </p>
+            </div>
+        </article>
+    </body>
+</html>
